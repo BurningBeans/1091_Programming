@@ -63,21 +63,22 @@ void guess(status &result, string passWd, string GpassWd)
     }
     else
     {
-        int Tsize = 0;//target size
-        int Nsize = 0;//now size
-        for(int i = 0;i < passWd.length(); i++)
+        for(int i = 0; i < passWd.length() ; i++)
         {
-            Tsize += passWd[i];
+            if (GpassWd[i] < passWd[i])
+            {
+                result = TL;
+                break;
+            }
+            else if(GpassWd[i] > passWd[i])
+            {
+                result = TH;
+                break;
+            }
+            else
+            {
+                result = RT;
+            }
         }
-        for(int i = 0;i < GpassWd.length(); i++)
-        {
-            Nsize += GpassWd[i];
-        }
-        if(passWd == GpassWd)
-        result = RT;
-        else if(Nsize < Tsize)
-        result = TL;
-        else if(Nsize > Tsize)
-        result = TH;
     }
 }
