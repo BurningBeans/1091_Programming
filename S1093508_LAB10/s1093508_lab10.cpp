@@ -53,20 +53,31 @@ void generatePassWd(string &passWd, int &passLen)
 }
 void guess(status &result, string passWd, string GpassWd)
 {
-    int Tsize = 0;//target size
-    int Nsize = 0;//now size
-    for(int i = 0;i < passWd.length(); i++)
+    if (passWd.length()>GpassWd.length())
     {
-        Tsize += passWd[i];
+        result = TL;
     }
-    for(int i = 0;i < GpassWd.length(); i++)
+    else if (passWd.length()<GpassWd.length())
     {
-        Nsize += GpassWd[i];
+        result = TH;
     }
-    if(Nsize < Tsize)
-    result = TL;
-    else if(Nsize > Tsize)
-    result = TH;
     else
-    result = RT;
+    {
+        int Tsize = 0;//target size
+        int Nsize = 0;//now size
+        for(int i = 0;i < passWd.length(); i++)
+        {
+            Tsize += passWd[i];
+        }
+        for(int i = 0;i < GpassWd.length(); i++)
+        {
+            Nsize += GpassWd[i];
+        }
+        if(passWd == GpassWd)
+        result = RT;
+        else if(Nsize < Tsize)
+        result = TL;
+        else if(Nsize > Tsize)
+        result = TH;
+    }
 }
