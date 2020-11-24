@@ -4,10 +4,10 @@ using namespace std;
 int main()
 {
     int max, min, temp;
-    int cyclelength, maxlength = 0;
     int n;
     while(cin >> min >> max)
     {
+        int cyclelength, maxlength = 0;
         cout << min << " " << max << " ";
         if(min > max)//switch if min > max
         {
