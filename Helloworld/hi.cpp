@@ -1,35 +1,19 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-    //string a ;
-    //cin >> a;
-    //cout << a.length();
-    int a = 0;
-    cin >> a;
-    switch (a)
-    {
-    case 1:case 2:case 3:
-        cout << "Hello";
-        break;
-    
-    default:
-        cout << "Nope";
-        break;
-    }
+    int passLen;
+    string passWd = "   ";
+    srand(time(0));
+    passLen = rand()%4+1;
 
-    /*
-    while(cin >> a)
-    {   
-        if(a.length()==1)
-        counter++;
-        if(a.back()=='.')
-        cout << a.length()-1 << " ";
-        else
-        cout << a.length() << " ";
+    for (int i=0; i<passLen; i++)
+    {
+      passWd[i] = 'a' + rand()% 26;
     }
-    cout << "\nCounter: " << counter;
-    */
+  std::cout << passWd << std::endl;
+  for (int i = 0; i < passWd.length(); i++)
+  {
+     std::cout << passWd[i] << std::endl;
+  }
 }
