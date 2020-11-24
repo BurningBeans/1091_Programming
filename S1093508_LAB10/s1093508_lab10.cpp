@@ -3,7 +3,6 @@ using namespace std;
 enum status {TH, TL, RT};
 void generatePassWd(string &, int &);
 void guess(status &, string ,string);
-
 int main()
 {
     status aGuess;
@@ -36,14 +35,19 @@ int main()
         cout << "Bravo you guess it right"<< endl;
         guesscount++;
     } while (aGuess!=RT);
-    
-    
-
 }
 void generatePassWd(string &passWd, int &passLen)
 {
     srand(time(0));
     passLen = rand()%4+1;
+    if(passLen==1)
+    passWd="0";
+    else if(passLen==2)
+    passWd="00";
+    else if(passLen==3)
+    passWd="000";
+    else
+    passWd="0000";
     for (int i=0; i<passLen; i++)
     passWd[i] = 'a' + rand()% 26;
 }
