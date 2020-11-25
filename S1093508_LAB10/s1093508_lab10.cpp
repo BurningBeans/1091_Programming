@@ -9,32 +9,60 @@ int main()
     string passWd;
     string GpassWd;
     int passLen;
-    generatePassWd(passWd, passLen);
-    cout << "The password is :" << passWd;
-    int guesscount=1;//total guess count
-    cout << "Guess a password having at most 4 lower-case letters. My guess is as follows : " << endl;
-    do
+    char play = 'y';
+    while(play == 'y'|| play == 'Y')
     {
-        cout << guesscount << "-";
-        if(guesscount==1)
-            cout << "st ";
-        else if(guesscount==2)
-            cout << "nd ";
-        else if(guesscount==3)
-            cout << "rd ";
-        else
-            cout << "th ";
-        cout << "guess = ";
-        cin >> GpassWd;
-        guess(aGuess, passWd, GpassWd);
-        if(aGuess == TL)
-        cout << "Too low. Try again." << endl;
-        else if(aGuess == TH)
-        cout << "Too high. Try again." << endl;
-        else
-        cout << "Bravo you guess it right"<< endl;
-        guesscount++;
-    } while (aGuess!=RT);
+        generatePassWd(passWd, passLen);
+        int guesscount = 1;//total guess count
+        cout << "Guess a password having at most 4 lower-case letters. My guess is as follows : " << endl;
+        do
+        {
+            cout << guesscount << "-";
+            if(guesscount==1)
+            {
+                cout << "st ";
+            }
+            else if(guesscount==2)
+            {
+                cout << "nd ";
+            }
+            else if(guesscount==3)
+            {
+                cout << "rd ";
+            }
+            else
+            {
+                cout << "th ";
+            }
+            cout << "guess = ";
+            cin >> GpassWd;
+            guess(aGuess, passWd, GpassWd);
+            if(aGuess == TL)
+            {
+                cout << "Too low. Try again." << endl;
+            }
+            else if(aGuess == TH)
+            {
+                cout << "Too high. Try again." << endl;
+            }
+            else
+            {
+                cout << "Bravo, you guess it right!"<< endl;
+                if(guesscount <= ceil(log2(pow(26,passLen))))
+                {
+                    cout << "You know the secret!" << endl;
+                }
+                else
+                {
+                    cout << "You should be able to do better" << endl;
+                }
+                break;
+            }
+            guesscount++;
+        } while (aGuess!=RT);
+        cout << "Play the game again (Y or y for yes): ";
+        cin >> play;
+    }
 }
 void generatePassWd(string &passWd, int &passLen)
 {
