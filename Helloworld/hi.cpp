@@ -2,6 +2,25 @@
 using namespace std;
 int main()
 {
+    ofstream outCilentFile( "clientFile.txt", ios::out);
+    if(!outCilentFile)
+    {
+        cerr << "File could not be opened! " << endl;
+        exit(1);
+    }
+    cout << "Enter Student ID, name and score." << endl;
+    cout << "Enter end-of-file to end input. \n";
+	time_t currentTime;
+	time (&currentTime);
+    string firstName;
+    string lastName;
+    double actBalance;
+    while (cin >> firstName >> lastName >> actBalance)
+    {
+        outCilentFile << firstName << ' ' << lastName << ' ' << actBalance << ' ' << ctime (&currentTime) << endl;
+        cout << "Next : " << endl;
+    }
+  /*
     int passLen;
     string passWd = "   ";
     srand(time(0));
@@ -16,4 +35,5 @@ int main()
   {
      std::cout << passWd[i] << std::endl;
   }
+  */
 }

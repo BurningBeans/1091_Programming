@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-void mySwap(const double a, const double b)
+void mySwap(double &&a, double &&b)
 {
     double t = a;
     a = b;
