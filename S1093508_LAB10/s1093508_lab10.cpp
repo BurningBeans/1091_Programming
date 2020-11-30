@@ -2,7 +2,7 @@
 using namespace std;
 enum status {TH, TL, RT};
 void generatePassWd(string &, int &);
-void guess(status &, string ,string);
+void guess(status &, string, string);
 int main()
 {
     status aGuess;

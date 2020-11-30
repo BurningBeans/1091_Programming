@@ -1,8 +1,14 @@
 #include <iostream>
-using namespace std;
-void mySwap(double &&a, double &&b)
+using std::cout;
+void mySwap(double &a, double &b)
 {
     double t = a;
+    a = b;
+    b = t;
+}
+void mySwap(int &a, int &b)//function overloading
+{
+    int t = a;
     a = b;
     b = t;
 }
