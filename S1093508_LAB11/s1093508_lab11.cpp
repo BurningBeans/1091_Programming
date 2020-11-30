@@ -42,35 +42,54 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
     string str2;
     vector <string> strV2;
     double balance;
+    vector <double> balances;
+    string line;//read whole line
     time_t currentTime;
     time (&currentTime);
+    vector <time_t> times;
+    vector <int> dupLine;//store line that are duplicate
     fptr.open(fileN);
     while(fptr >> str1 >> str2 >> balance >> currentTime)//read line and compare
     {
         strV1.push_back(str1);
         strV2.push_back(str2);
+        balances.push_back(balance);
+        times.push_back(currentTime);
     }
+    //find the duplicate line
     for(int i = 0; i < strV1.size(); i++)
     {
-        for(int j = i+1; j < strV1.size(); j++)
+        for(int j = i; j < strV1.size(); j++)
         {
+            if (j==i)
+            {
+                continue;
+            }
             if(strV1[i] == strV1[j] && strV2[i] == strV2[j])
             {
-                int counter = 0;
-                fptr.clear();
-                fptr.seekg(0,ios::beg);
-                fptr.seekp(0,ios::beg);
-                while(fptr >> str1 >> str2 >> balance >> currentTime)
-                {
-                    if(counter == j)
-                    {
-                        continue;
-                    }
-                    fptr << str1 << ' ' << str2 << ' ' << balance << ' ' << currentTime << endl;
-                    counter++;
-                }
+                dupLine.push_back(j);
+                //cout << endl << j << endl;//debug line
             }
         }
+    }
+    fptr.close();
+    fptr.open(fileN,ios::in);
+    for(int i = 0; i < strV1.size(); i++)
+    {
+        bool skip = false;
+        for(int j = 0; j < dupLine.size();j++)
+        {
+            if(i==dupLine[j])
+            {
+                skip = true;
+                break;
+            }
+        }
+        if(skip)
+        {
+            continue;
+        }
+        fptr << strV1[i] << ' ' << strV2[i] << ' ' << balances[i] << ' ' << times[i] << endl;
     }
 }
 void createRecord(ofstream &fptr, string firstN, string lastN, double actBal)
