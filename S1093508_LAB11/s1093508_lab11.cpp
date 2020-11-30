@@ -59,12 +59,8 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
     //find the duplicate line
     for(int i = 0; i < strV1.size(); i++)
     {
-        for(int j = i; j < strV1.size(); j++)
+        for(int j = i+1; j < strV1.size(); j++)
         {
-            if (j==i)
-            {
-                continue;
-            }
             if(strV1[i] == strV1[j] && strV2[i] == strV2[j])
             {
                 dupLine.push_back(j);
@@ -73,13 +69,13 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
         }
     }
     fptr.close();
-    fptr.open(fileN,ios::in);
-    for(int i = 0; i < strV1.size(); i++)
+    ofstream outputFile(fileN);
+    for(int i = 0 ; i < strV1.size(); i++)
     {
         bool skip = false;
-        for(int j = 0; j < dupLine.size();j++)
+        for(int j = 0; j < dupLine.size(); j++)
         {
-            if(i==dupLine[j])
+            if(i == dupLine[j])
             {
                 skip = true;
                 break;
@@ -89,8 +85,10 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
         {
             continue;
         }
-        fptr << strV1[i] << ' ' << strV2[i] << ' ' << balances[i] << ' ' << times[i] << endl;
+        else
+        outputFile << strV1[i] << ' ' << strV2[i] << ' ' << balances[i] << ' ' << times[i] << endl;
     }
+    outputFile.close();
 }
 void createRecord(ofstream &fptr, string firstN, string lastN, double actBal)
 {
