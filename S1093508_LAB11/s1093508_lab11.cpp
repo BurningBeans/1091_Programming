@@ -1,31 +1,30 @@
 #include <bits/stdc++.h>
-using namespace std;
-void removeDuplicateRecords(fstream  &, const string );
-void createRecord(ofstream &, string , string , double );
+void removeDuplicateRecords(std::fstream  &, const std::string );
+void createRecord(std::ofstream &, std::string , std::string , double );
 void displayFile();
 int main()
 {
-    ifstream inclientFile("clientFile.txt");
-    ofstream outclientFile;
-    fstream clientFile;
-    string fileName = "clientFile.txt";
-    string firstName;
-    string lastName;
+    std::ifstream inclientFile("clientFile.txt");
+    std::ofstream outclientFile;
+    std::fstream clientFile;
+    std::string fileName = "clientFile.txt";
+    std::string firstName;
+    std::string lastName;
     double actBalance;
     if(inclientFile)//if there is existing file do...
     {
-        cout << "Existing file content: " << endl;
+        std::cout << "Existing file content: " << std::endl;
         displayFile();
-        outclientFile.open("clientFile.txt", ios::app);//Add to existing file
+        outclientFile.open("clientFile.txt", std::ios::app);//Add to existing file
     }
     else
     {
-        cout << "Creating a new file: " << endl;
-        outclientFile.open("clientFile.txt", ios::out);//Creating new file
+        std::cout << "Creating a new file: " << std::endl;
+        outclientFile.open("clientFile.txt", std::ios::out);//Creating new file
     }
     //End first step
-    cout << "Enter first name, last name, and balance: " ;
-    while(cin >> firstName >> lastName >> actBalance)
+    std::cout << "Enter first name, last name, and balance: " ;
+    while(std::cin >> firstName >> lastName >> actBalance)
     {
         createRecord(outclientFile, firstName, lastName, actBalance);
     }
@@ -35,19 +34,19 @@ int main()
     
     displayFile();
 }
-void removeDuplicateRecords(fstream &fptr, const string fileN)
+void removeDuplicateRecords(std::fstream &fptr, const std::string fileN)
 {
-    string str1;
-    vector <string> strV1;  
-    string str2;
-    vector <string> strV2;
+    std::string str1;
+    std::vector <std::string> strV1;  
+    std::string str2;
+    std::vector <std::string> strV2;
     double balance;
-    vector <double> balances;
-    string line;//read whole line
+    std::vector <double> balances;
+    std::string line;//read whole line
     time_t currentTime;
     time (&currentTime);
-    vector <time_t> times;
-    vector <int> dupLine;//store line that are duplicate
+    std::vector <time_t> times;
+    std::vector <int> dupLine;//store line that are duplicate
     fptr.open(fileN);
     while(fptr >> str1 >> str2 >> balance >> currentTime)//read line and compare
     {
@@ -63,19 +62,20 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
         {
             if(strV1[i] == strV1[j] && strV2[i] == strV2[j])
             {
-                dupLine.push_back(j);
+                dupLine.push_back(i);
                 //cout << endl << j << endl;//debug line
             }
         }
     }
     fptr.close();
-    ofstream outputFile(fileN);
+    //write to file
+    std::ofstream outputFile(fileN);
     for(int i = 0 ; i < strV1.size(); i++)
     {
         bool skip = false;
         for(int j = 0; j < dupLine.size(); j++)
         {
-            if(i == dupLine[j])
+            if(i == dupLine[j])//if printing line == any dupilcate line skip
             {
                 skip = true;
                 break;
@@ -86,36 +86,36 @@ void removeDuplicateRecords(fstream &fptr, const string fileN)
             continue;
         }
         else
-        outputFile << strV1[i] << ' ' << strV2[i] << ' ' << balances[i] << ' ' << times[i] << endl;
+        outputFile << strV1[i] << ' ' << strV2[i] << ' ' << balances[i] << ' ' << times[i] << std::endl;
     }
     outputFile.close();
 }
-void createRecord(ofstream &fptr, string firstN, string lastN, double actBal)
+void createRecord(std::ofstream &fptr, std::string firstN, std::string lastN, double actBal)
 {
     time_t currentTime;
     time (&currentTime);
-    fptr << firstN << ' ' << lastN << ' ' << actBal << ' ' << currentTime << endl;
+    fptr << firstN << ' ' << lastN << ' ' << actBal << ' ' << currentTime << std::endl;
 }
 void displayFile()
 {
-    string str1;
-    string str2;
-    string fileN = "clientFile.txt";
-    ifstream fptr;
+    std::string str1;
+    std::string str2;
+    std::string fileN = "clientFile.txt";
+    std::ifstream fptr;
     fptr.open(fileN);
     double balance;
     int numAct = 0;
     time_t transTime;
     if ( !fptr ) 
     {
-        cerr << "File could not be opened" << endl;
+        std::cerr << "File could not be opened" << std::endl;
         exit( 1 );
     } // end if
     while(fptr >> str1 >> str2 >> balance >> transTime) 
     {
-        cout << setw(15) << str1 << ' ' << setw(15) << str2 << ' ' << setw(7) << balance << " " << ctime(&transTime);
+        std::cout << std::setw(15) << str1 << ' ' << std::setw(15) << str2 << ' ' << std::setw(7) << balance << " " << ctime(&transTime);
         numAct++;
     }
-    cout << "Number of records in the file " << fileN << ": " << numAct << endl;
-    fptr.close();// I added to close the file
+    std::cout << "Number of records in the file " << fileN << ": " << numAct << std::endl;
+    fptr.close();// I added to close the file after display
 }
