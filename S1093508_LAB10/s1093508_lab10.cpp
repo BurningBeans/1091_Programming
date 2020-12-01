@@ -1,18 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
+string realpassWd;
 enum status {TH, TL, RT};
 void generatePassWd(string &, int &);
-void guess(status &, string, string);
+void guess(status &, string, int);
 int main()
 {
     status aGuess;
-    string passWd;
     string GpassWd;
     int passLen;
     char play = 'y';
     while(play == 'y'|| play == 'Y')
     {
-        generatePassWd(passWd, passLen);
+        generatePassWd(realpassWd, passLen);
+        cout << "The password is : " << realpassWd << endl; //debug line
         int guesscount = 1;//total guess count
         cout << "Guess a password having at most 4 lower-case letters. My guess is as follows : " << endl;
         do
@@ -36,7 +37,7 @@ int main()
             }
             cout << "guess = ";
             cin >> GpassWd;
-            guess(aGuess, passWd, GpassWd);
+            guess(aGuess, GpassWd, passLen);
             if(aGuess == TL)
             {
                 cout << "Too low. Try again." << endl;
@@ -79,26 +80,26 @@ void generatePassWd(string &passWd, int &passLen)
     for (int i=0; i<passLen; i++)
     passWd[i] = 'a' + rand()% 26;
 }
-void guess(status &result, string passWd, string GpassWd)
+void guess(status &result, string passWd, int passLen)
 {
-    if (passWd.length()>GpassWd.length())
+    if (passLen>passWd.length())
     {
         result = TL;
     }
-    else if (passWd.length()<GpassWd.length())
+    else if (passLen<passWd.length())
     {
         result = TH;
     }
     else
     {
-        for(int i = 0; i < passWd.length() ; i++)
+        for(int i = 0; i < passLen ; i++)
         {
-            if (GpassWd[i] < passWd[i])
+            if (realpassWd[i] > passWd[i])
             {
                 result = TL;
                 break;
             }
-            else if(GpassWd[i] > passWd[i])
+            else if(realpassWd[i] < passWd[i])
             {
                 result = TH;
                 break;
