@@ -46,7 +46,7 @@ void removeDuplicateRecords(std::fstream &fptr, const std::string fileN)
     time_t currentTime;
     time (&currentTime);
     std::vector <time_t> times;
-    std::vector <int> dupLine;//store line that are duplicate
+    std::vector <int> dupLine;//store the number of lines that are duplicate
     fptr.open(fileN);
     while(fptr >> str1 >> str2 >> balance >> currentTime)//read line and compare
     {

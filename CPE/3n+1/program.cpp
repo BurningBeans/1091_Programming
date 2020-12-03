@@ -21,7 +21,7 @@ int main()
             cyclelength = 1;//remember to reset before caculate other length...
             while(n!=1)
             {
-                if(n % 2 == 1)
+                if(n % 2)
                 {
                     n = n * 3 + 1;
                 }
