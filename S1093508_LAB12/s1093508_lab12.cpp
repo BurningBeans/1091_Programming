@@ -30,7 +30,7 @@ int main()
         else if(datatype == "double")
         {
             double anAry[10000];
-            double secondLargest;
+            double secondLargest = 0;
             int loc;
             std::cin >> casecount2;
             for(int i = 0; i < casecount2; i++)
