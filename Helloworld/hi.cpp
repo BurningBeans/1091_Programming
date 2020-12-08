@@ -2,6 +2,13 @@
 using namespace std;
 int main()
 {
+	string str("Hello World!");
+    for(auto i : str)
+    cout << i << ' ';
+
+
+	
+  /*
     ofstream outCilentFile( "clientFile.txt", ios::out);
     if(!outCilentFile)
     {
@@ -17,9 +24,10 @@ int main()
     double actBalance;
     while (cin >> firstName >> lastName >> actBalance)
     {
-        outCilentFile << firstName << ' ' << lastName << ' ' << actBalance << ' ' << ctime (&currentTime) << endl;
+        outCilentFile << firstName << ' ' << lastName << ' ' << actBalance << ' ' << currentTime << endl;
         cout << "Next : " << endl;
     }
+  */
   /*
     int passLen;
     string passWd = "   ";

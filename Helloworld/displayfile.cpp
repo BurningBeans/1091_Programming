@@ -1,33 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-void makefile();
-void read();
+//void makefile();
+//void read();
+void createRecord(ofstream &fptr, string firstN, string lastN, double actBal)
+{
+    time_t currentTime;
+    fptr << firstN << ' ' << lastN << ' ' << actBal << ' ' << currentTime;
+}
 int main()
 {
-    /*
-    char Y;
-    do
-    {
-        char Y1;
-        cout << "Make file? (Y/y = yes)";
-        cin >> Y1;
-        if(Y1 == 'Y'||Y == 'y')
-        {
-            makefile();
-        } 
-        cout << "Read file? (Y/y = yes)";
-        char Y2;
-        cin >> Y2;
-        if(Y2 == 'Y'||Y == 'y')
-        {
-            read();
-        }
-        cout << "Continue?";
-        cin >> Y;
-    }while(Y == 'Y'||Y == 'y');
-    */
-   read();
+    ofstream fptr("test.txt",ios::out);
+    string f;
+    string l;
+    double actBal;
+    cin >> f >> l >> actBal;
+    createRecord(fptr, f , l ,actBal);
 }
+
+/*
 void makefile()
 {
     string name;
@@ -64,6 +54,7 @@ void read()
     }
     cout << "Total lines : " << lines;
 }
+*/
 /*
     string str1;
     string str2;

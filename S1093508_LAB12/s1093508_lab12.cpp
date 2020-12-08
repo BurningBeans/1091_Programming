@@ -1,7 +1,35 @@
 #include <iostream>
 #include <string>
 template <typename T>
-void findSecondLargest(T [], int, T &, int &);
+void findSecondLargest(T anAry[], int numElm, T &secondLargest, int &loc)
+{
+    T largest = anAry[0];
+    bool found = false;
+    for(int i = 0; i < numElm; i++)
+    {
+        if(anAry[i] > largest)
+        {
+            largest = anAry[i];
+        }
+    }
+    for(int i = 0; i < numElm; i++)
+    {
+        if(largest == anAry[i])
+        {
+            continue;
+        }
+        if(anAry[i]>=secondLargest)// use >= because find it's last occurrence
+        {
+            secondLargest = anAry[i];
+            loc = i;
+            found = true;// if no second largest found = false;
+        }
+    }
+    if(!found)
+    {
+        loc = -1;//set loc to -1
+    }
+}
 int main()
 {
     int casecount;
@@ -66,33 +94,40 @@ int main()
     }
     return 0;
 }
-template <typename T>
-void findSecondLargest(T anAry[], int numElm, T &secondLargest, int &loc)
-{
-    T largest = anAry[0];
-    bool found = false;
-    for(int i = 0; i < numElm; i++)
-    {
-        if(anAry[i] > largest)
-        {
-            largest = anAry[i];
-        }
-    }
-    for(int i = 0; i < numElm; i++)
-    {
-        if(largest == anAry[i])
-        {
-            continue;
-        }
-        if(anAry[i]>=secondLargest)// use >= because find it's last occurrence
-        {
-            secondLargest = anAry[i];
-            loc = i;
-            found = true;// if no second largest found = false;
-        }
-    }
-    if(!found)
-    {
-        loc = -1;//set loc to -1
-    }
-}
+
+/*
+4
+int
+5
+4
+4
+4
+4
+4
+int
+5
+1
+2
+2
+3
+3
+double
+7
+0.1
+0.5
+0.4
+0.2
+0.4
+0.2
+-0.1
+string
+8
+Aa
+bbbb
+Bbbb
+Zxyz
+cE
+d
+cE
+b
+*/
