@@ -21,6 +21,7 @@ using std::fstream;
 const int maxstudents = 200;
 const int maxtests = 10;
 //----------------------------------------------------------------
+void readGrades(ifstream &, int [][maxtests], int &, int &);
 int minimun(const int [] [maxtests], int, int);
 int maximun(const int [] [maxtests], int, int);
 double arverage(const int [] [maxtests],int, int, string);
@@ -40,26 +41,30 @@ int main(int argc, char *[])
         return 1;
     }
     int students, tests;
-    cout << "The numbers of students : ";
-    inStudentGrades >> students;
-    cout << students << endl;
-    cout << "The number of tests : ";
-    inStudentGrades >> tests;
-    cout <<  tests << endl;
-    //Create grades table
     int studentsGrades[maxstudents][maxtests];
-    int grades;
-    for(int i = 0; i < students; i++)
-    {
-        for(int j = 0; j < tests;j++)
-        {
-            inStudentGrades >> grades;
-            studentsGrades[i][j] = grades;
-        }
-    }
+    readGrades(inStudentGrades,studentsGrades,students,tests);
     ouptutGrades(studentsGrades, students, tests);
     outputBarChart(studentsGrades, students, tests);
     outputVertBarChart(studentsGrades, students, tests);
+}
+void readGrades(ifstream &inFile, int studentGrades[ ][maxtests], int &numStudents, int &numTests)
+{
+    cout << "The numbers of students : ";
+    inFile >> numStudents;
+    cout << numStudents << endl;
+    cout << "The number of tests : ";
+    inFile >> numTests;
+    cout <<  numTests << endl;
+    //Create grades table
+    int grades;
+    for(int i = 0; i < numStudents; i++)
+    {
+        for(int j = 0; j < numTests;j++)
+        {
+            inFile >> grades;
+            studentGrades[i][j] = grades;
+        }
+    }
 }
 int minimun(const int grades[][maxtests], int students, int tests) 
 {
