@@ -2,12 +2,16 @@
 #include "fstream"
 #include "string"
 #include "iomanip"
+#include "vector"
 //----------------------------------------------------------------
 using std::string;
+using std::vector;
 using std::cout;
 using std::endl;
 using std::cin;
 using std::setw;
+using std::setprecision;
+using std::fixed;
 using std::ofstream;
 using std::ifstream;
 using std::fstream;
@@ -17,7 +21,7 @@ const int maxtests = 10;
 //----------------------------------------------------------------
 int minimun(const int [] [maxtests], int, int);
 int maximun(const int [] [maxtests], int, int);
-double arverage(const int [] [maxtests],int, int);
+double arverage(const int [] [maxtests],int, int, string);
 void ouptutGrades(const int [] [maxtests], int, int);
 //void outputBarChart(const int[] [maxtests], int, int);
 //------------------------------
@@ -33,10 +37,10 @@ int main(int argc, char *[])
         return 1;
     }
     int students, tests;
-    cout << "Input the numbers of students : ";
+    cout << "The numbers of students : ";
     inStudentGrades >> students;
     cout << students << endl;
-    cout << "Input the number of tests : ";
+    cout << "The number of tests : ";
     inStudentGrades >> tests;
     cout <<  tests << endl;
     //Create grades table
@@ -74,14 +78,30 @@ int maximun(const int grades[][maxtests], int students, int tests)
     }
     return highest;
 }
-double average(const int grades[][maxtests],int students, int tests)//TODO: This function is not finished yet.
+double average(const int grades[][maxtests],int students, int tests, string type)//TODO: This function is not finished yet.
 {
     int sum = 0;
-    for(int i = 0; i < students; i++)
+    if(type=="students")//average of students score
     {
-        sum += grades[i][tests];
+        for(int i = 0; i < tests; i++)
+        {
+            sum += grades[students][i];
+        }
+        return (double)sum/tests;
     }
-    return (double)sum/tests;
+    else if(type=="tests")//average of tests score
+    {
+        for(int i = 0; i <students; i++)
+        {
+            sum += grades[i][tests];
+        }
+        return (double)sum/students;
+    }
+    else
+    {
+        std::cerr << "Error for this function";
+        exit(1);
+    }
 }
 void ouptutGrades(const int grades[] [maxtests], int students, int tests)
 {
@@ -95,13 +115,13 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
             cout << "Average" << endl;
         }
     }
+    // content of array
     cout << "            ";
     for(int i = 0; i <= tests; i++)
     {
         cout << "-------" <<' ';
     }
     cout << endl;
-    //
     for(int i = 0; i < students; i++)
     {
         cout << "Student" << setw(4) << i+1 << ' ';
@@ -109,13 +129,64 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
         {
             cout << setw(7) << grades[i][j] << ' ';
         }
-        cout << setw(7) << average(grades,i,tests) << endl;
+        cout << setw(7) << setprecision(2) << fixed << average(grades,i,tests, "students");// setprecision and fixed to make it print out decimal 2 places
+        cout << endl;
     }
-    //
     cout << "            ";
     for(int i = 0; i <= tests; i++)
     {
         cout << "-------" <<' ';
     }
     cout << endl;
+    // Average of all tests
+    cout << "Average     ";
+    vector <double> scores;
+    for(int i = 0; i < tests; i++)
+    {
+        cout << setw(7) << (int)average(grades, students, i, "tests") << ' ';
+        scores.push_back(average(grades, students, i, "tests"));
+        if(i == tests-1)
+        {
+            double total = 0;
+            for(auto j : scores)//useful in range loop
+            {
+                total += j;
+            }
+            cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
+        }
+    }
+    scores.clear();//clear for future uses
+    //print minimun
+    cout << "minimun     ";
+    for(int i = 0; i < tests; i++)
+    {
+        cout << setw(7) << minimun(grades,students,i) << ' ';
+        scores.push_back(minimun(grades,students,i));
+        if(i == tests-1)
+        {
+            double total = 0;
+            for(auto j : scores)//useful in range loop
+            {
+                total += j;
+            }
+            cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
+        }
+    }
+    scores.clear();
+    //print maximun
+    cout << "maximun     ";
+    for(int i = 0; i < tests; i++)
+    {
+        cout << setw(7) << maximun(grades,students,i) << ' ';
+        scores.push_back(maximun(grades,students,i));
+        if(i == tests-1)
+        {
+            double total = 0;
+            for(auto j : scores)//useful in range loop
+            {
+                total += j;
+            }
+            cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
+        }
+    }
 }
