@@ -25,7 +25,7 @@ int minimun(const int [] [maxtests], int, int);
 int maximun(const int [] [maxtests], int, int);
 double arverage(const int [] [maxtests],int, int, string);
 void ouptutGrades(const int [] [maxtests], int, int);
-//void outputBarChart(const int[] [maxtests], int, int);
+void outputBarChart(const int[] [maxtests], int, int);
 //------------------------------
 int main(int argc, char *[])
 {
@@ -57,6 +57,7 @@ int main(int argc, char *[])
         }
     }
     ouptutGrades(studentsGrades, students, tests);
+    outputBarChart(studentsGrades, students, tests);
 }
 int minimun(const int grades[][maxtests], int students, int tests) 
 {
@@ -180,5 +181,82 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
             double total = 0;
             cout << setw(7) << setprecision(2) << fixed << *averagescores.rbegin() << endl;//reverse begin because .end() won't get the last element
         }
+    }
+}
+void outputBarChart(const int grades[] [maxtests], int students, int tests)
+{
+    cout << "Overall grades distribution (Horizontal bar chart):" << endl;
+    cout << "---------------------------------------------------" << endl;
+    //really stupid way to store counters...
+    int scores[12] = {0};
+    for (int i = 0; i < students; i++)
+    {
+        for(int j = 0; j < tests; j++)
+        {
+            if(grades[i][j] >= 100)
+                scores[11]++;
+            else if (grades[i][j] >= 90)
+                scores[10]++;
+            else if (grades[i][j] >= 80)
+                scores[9]++;
+            else if (grades[i][j] >= 70)
+                scores[8]++;
+            else if (grades[i][j] >= 60)
+                scores[7]++;
+            else if (grades[i][j] >= 50)
+                scores[6]++;
+            else if (grades[i][j] >= 40)
+                scores[5]++;
+            else if (grades[i][j] >= 30)
+                scores[4]++;
+            else if (grades[i][j] >= 20)
+                scores[3]++;
+            else if (grades[i][j] >= 10)
+                scores[2]++;
+            else if (grades[i][j] > 0)
+                scores[1]++;
+            else
+                scores[0]++;
+        }
+    }
+    //end of the counter loop
+    for(int i = 0; i < 12; i++)
+    {
+        if(i == 0)
+            cout << setw(6) << "0:";
+        if(i == 1)
+            cout << setw(6) << "1-9:";
+        if(i == 2)
+            cout << setw(6) << "10-19:";
+        if(i == 3)
+            cout << setw(6) << "20-29:";
+        if(i == 4)
+            cout << setw(6) << "30-39:";
+        if(i == 5)
+            cout << setw(6) << "40-49:";
+        if(i == 6)
+            cout << setw(6) << "50-59:";
+        if(i == 7)
+            cout << setw(6) << "60-69:";
+        if(i == 8)
+            cout << setw(6) << "70-79:";
+        if(i == 9)
+            cout << setw(6) << "80-89:";
+        if(i == 10)
+            cout << setw(6) << "90-99:";
+        if(i == 11)
+            cout << setw(6) << "100:";
+        //
+        cout << ' ';
+        if(scores[i]==0)
+        {
+            cout << endl;
+            continue;
+        }
+        for(int j = 0; j < scores[i]; j++)
+        {
+            cout << '*';
+        }
+        cout << scores[i] <<endl;
     }
 }
