@@ -3,9 +3,11 @@
 #include "string"
 #include "iomanip"
 #include "vector"
+#include "set"
 //----------------------------------------------------------------
 using std::string;
 using std::vector;
+using std::set;
 using std::cout;
 using std::endl;
 using std::cin;
@@ -122,6 +124,7 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
         cout << "-------" <<' ';
     }
     cout << endl;
+    set<double>averagescores;// using set because easy to find the largest and smallest value
     for(int i = 0; i < students; i++)
     {
         cout << "Student" << setw(4) << i+1 << ' ';
@@ -129,7 +132,8 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
         {
             cout << setw(7) << grades[i][j] << ' ';
         }
-        cout << setw(7) << setprecision(2) << fixed << average(grades,i,tests, "students");// setprecision and fixed to make it print out decimal 2 places
+        cout << setw(7) << setprecision(2) << fixed << average(grades, i, tests, "students");// setprecision and fixed to make it print out decimal 2 places
+        averagescores.insert(average(grades,i,tests, "students"));//put all averages into set
         cout << endl;
     }
     cout << "            ";
@@ -155,38 +159,26 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
             cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
         }
     }
-    scores.clear();//clear for future uses
     //print minimun
     cout << "minimun     ";
     for(int i = 0; i < tests; i++)
     {
         cout << setw(7) << minimun(grades,students,i) << ' ';
-        scores.push_back(minimun(grades,students,i));
         if(i == tests-1)
         {
             double total = 0;
-            for(auto j : scores)//useful in range loop
-            {
-                total += j;
-            }
-            cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
+            cout << setw(7) << setprecision(2) << fixed << *averagescores.begin() << endl;
         }
     }
-    scores.clear();
     //print maximun
     cout << "maximun     ";
     for(int i = 0; i < tests; i++)
     {
         cout << setw(7) << maximun(grades,students,i) << ' ';
-        scores.push_back(maximun(grades,students,i));
         if(i == tests-1)
         {
             double total = 0;
-            for(auto j : scores)//useful in range loop
-            {
-                total += j;
-            }
-            cout << setw(7) << setprecision(2) << fixed << (double)total/tests << endl;
+            cout << setw(7) << setprecision(2) << fixed << *averagescores.rbegin() << endl;//reverse begin because .end() won't get the last element
         }
     }
 }
