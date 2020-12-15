@@ -25,7 +25,7 @@ int maximun(const int [] [maxtests], int, int);
 double arverage(const int [] [maxtests],int, int, string);
 void ouptutGrades(const int [] [maxtests], int, int);
 void outputBarChart(const int[] [maxtests], int, int);
-void  outputVertBarChart(const int[] [maxtests], int, int);
+void outputVertBarChart(const int[] [maxtests], int, int);
 //------------------------------
 int main(int argc, char *[])
 {
