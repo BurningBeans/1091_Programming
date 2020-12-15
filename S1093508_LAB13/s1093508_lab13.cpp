@@ -14,9 +14,7 @@ using std::cin;
 using std::setw;
 using std::setprecision;
 using std::fixed;
-using std::ofstream;
 using std::ifstream;
-using std::fstream;
 //----------------------------------------------------------------
 const int maxstudents = 200;
 const int maxtests = 10;
@@ -186,7 +184,7 @@ void ouptutGrades(const int grades[] [maxtests], int students, int tests)
         if(i == tests-1)
         {
             double total = 0;
-            cout << setw(7) << setprecision(2) << fixed << *averagescores.rbegin() << endl;//reverse begin because .end() won't get the last element
+            cout << setw(7) << setprecision(2) << fixed << *averagescores.rbegin() << endl;//or using *std::prev(averagescores.end())
         }
     }
 }
