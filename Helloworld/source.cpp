@@ -1,9 +1,28 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include <set>
+#include <algorithm>
 using namespace std;
 int main()
 {
+    int a;
+    vector<int>num;
+    while(cin>>a)
+        num.push_back(a);
+    cout <<"*num.begin() is :"<< *num.begin() << endl;
+    cout<<"*num.end() is : " <<*num.end() << endl;
+    cout <<"last element should be :"<< *num.rbegin()<<endl;
+    cout <<"prev of end :" <<*prev(num.end())<<endl;
+    reverse(num.begin(), num.end());
+    cout << "All the element are : ";
+    for(auto i: num)
+    {
+        cout << i << ' ';
+    }
+    cout << endl;
+
+    /*
     int n;
     cin >> n;
     while(n!=0)
@@ -46,4 +65,5 @@ int main()
         cout << sum <<endl;
         cin >> n;
     }
+    */
 }

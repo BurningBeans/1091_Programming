@@ -41,6 +41,7 @@ int main(int argc, char *[])
     int students, tests;
     int studentsGrades[maxstudents][maxtests];
     readGrades(inStudentGrades,studentsGrades,students,tests);
+    inStudentGrades.close();
     ouptutGrades(studentsGrades, students, tests);
     outputBarChart(studentsGrades, students, tests);
     outputVertBarChart(studentsGrades, students, tests);
@@ -192,12 +193,25 @@ void outputBarChart(const int grades[] [maxtests], int students, int tests)
 {
     cout << "Overall grades distribution (Horizontal bar chart):" << endl;
     cout << "---------------------------------------------------" << endl;
-    //really stupid way to store counters...
     int scores[12] = {0};
     for (int i = 0; i < students; i++)
     {
         for(int j = 0; j < tests; j++)
         {
+            for(int k = 11; k > 0; k--)
+            {
+                if(grades[i][j]==0)
+                {
+                    scores[0]++;
+                    break;
+                }
+                if(grades[i][j]>=((k-1)*10))
+                {
+                    scores[k]++;
+                    break;
+                }
+            }
+            /* stupid way to store counters
             if(grades[i][j] >= 100)
                 scores[11]++;
             else if (grades[i][j] >= 90)
@@ -222,6 +236,7 @@ void outputBarChart(const int grades[] [maxtests], int students, int tests)
                 scores[1]++;
             else
                 scores[0]++;
+            */
         }
     }
     //end of the counter loop
@@ -275,6 +290,26 @@ void outputVertBarChart(const int grades[] [maxtests], int students, int tests)
     {
         for(int j = 0; j < tests; j++)
         {
+            for(int k = 11; k > 0; k--)
+            {
+                if(grades[i][j]==0)
+                {
+                    scores[0]++;
+                    break;
+                }
+                if(grades[i][j]>=((k-1)*10))
+                {
+                    scores[k]++;
+                    break;
+                }
+            }
+        }
+    }
+    /*
+    for (int i = 0; i < students; i++)
+    {
+        for(int j = 0; j < tests; j++)
+        {
             if(grades[i][j] >= 100)
                 scores[11]++;
             else if (grades[i][j] >= 90)
@@ -301,6 +336,7 @@ void outputVertBarChart(const int grades[] [maxtests], int students, int tests)
                 scores[0]++;
         }
     }
+    */
     //end of for loop
     cout << setw(6) << "0" << setw(6) << "1-9" << setw(6) << "10-19" << setw(6) << "20-29" << setw(6) << "30-39" << setw(6) << "40-49" << setw(6) << "50-59" << setw(6) << "60-69" << setw(6) << "70-79" << setw(6) << "80-89" << setw(6) << "90-99"  << setw(6) << "100" << endl;
     cout << "------------------------------------------------------------------------" << endl;

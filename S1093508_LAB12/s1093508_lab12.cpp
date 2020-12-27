@@ -4,6 +4,25 @@ template <typename T>
 void findSecondLargest(T anAry[], int numElm, T &secondLargest, int &loc)
 {
     T largest = anAry[0];
+    secondLargest = anAry[0];
+    int largestloc = 0;
+    loc = -1;
+    for(int i = 0; i < numElm; i++)
+    {
+        if(largest < anAry[i])
+        {
+            secondLargest = largest;
+            loc = largestloc;
+            largestloc = i;
+            largest = anAry[i];
+        }
+        else if(secondLargest <= anAry[i]&&anAry[i] != largest)//something wrong with this line
+        {
+            secondLargest = anAry[i];
+            loc = i;
+        }
+    }
+    /* not fastest way to find second largest element
     bool found = false;
     for(int i = 0; i < numElm; i++)
     {
@@ -29,6 +48,7 @@ void findSecondLargest(T anAry[], int numElm, T &secondLargest, int &loc)
     {
         loc = -1;//set loc to -1
     }
+    */
 }
 int main()
 {
