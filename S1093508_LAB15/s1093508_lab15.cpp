@@ -73,15 +73,16 @@ int main(int argc, char **)
                     print = true;
                     break;
                 }
-                if(rawinputV[i]!=rawansV[i])
-                {
-                    cout << "Run #" << runcount << " : Presentation Error." << endl;
-                    print = true;
-                    break;
-                }
+                for(int j = 0; j < rawansV[i].size(); j++)
+                    if(rawansV[i][j]!=' '&&rawinputV[i][j]==' ')
+                    {
+                        cout << "Run #" << runcount << " : Presentation Error." << endl;
+                        print = true;
+                        break;
+                    }
             }
             if(!print)
-                cout << "Run #" << runcount << " : Right Answer." << endl;
+                cout << "Run #" << runcount << " : Accepted." << endl;
         }
         else
         {
