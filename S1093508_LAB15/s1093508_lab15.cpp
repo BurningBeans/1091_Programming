@@ -68,24 +68,28 @@ int main(int argc, char **)
             {
                 if(inputV[i]!=ansV[i])
                 {
-                    cout << "Run #" << runcount << " : Wrong Answer." << endl;
+                    cout << "Run #" << runcount << ": Wrong Answer." << endl;
                     print = true;
                     break;
                 }
                 for(int j = 0; j < rawansV[i].size(); j++)
-                    if(rawansV[i][j]!=' '&&rawinputV[i][j]==' ')
+                    if(rawansV[i][j]!=rawinputV[i][j])
                     {
-                        cout << "Run #" << runcount << " : Presentation Error." << endl;
+                        cout << "Run #" << runcount << ": Presentation Error." << endl;
                         print = true;
                         break;
                     }
+                if(print)
+                {
+                    break;
+                }
             }
             if(!print)
-                cout << "Run #" << runcount << " : Accepted." << endl;
+                cout << "Run #" << runcount << ": Accepted." << endl;
         }
         else
         {
-            cout << "Run #" << runcount << " : Wrong Answer." << endl;
+            cout << "Run #" << runcount << ": Wrong Answer." << endl;
         }
         //------------------------------
         inputV.clear();
