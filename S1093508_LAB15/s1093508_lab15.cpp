@@ -11,7 +11,6 @@ int main(int argc, char **)
     int runcount = 1;
     while(true)
     {
-        
         //------------------------------
         //doing inputs
         while(getline(cin,input))
@@ -29,7 +28,7 @@ int main(int argc, char **)
             inputV.push_back(input);
             input.clear();
         }
-        cout <<"first input end"<<endl;
+        //cout <<"first input end"<<endl;
         while(getline(cin,ans))
         {
             rawansV.push_back(ans);
@@ -45,7 +44,7 @@ int main(int argc, char **)
             ansV.push_back(ans);
             ans.clear();
         }
-        cout <<"end of second input" << endl;
+        //cout <<"end of second input" << endl;
         //------------------------------
         //just debugging lines
         /*
@@ -108,3 +107,95 @@ int main(int argc, char **)
         
     }
 }
+/*
+15 0 3
+!@#$%
+1503
+!@#$%
+y
+1 5 0 3
+
+!@#$%
+15  	 03
+!@#$%
+y
+2
+The answer is: 10
+
+   The answer is: 5
+!@#$%
+2
+
+The answer is: 10
+The answer is: 5
+
+!@#$%
+Y
+2
+The answer is: 10
+   	
+The answer is: 15
+!@#$%
+2
+The answer is: 10
+The answer is: 15
+    
+!@#$%
+Y
+2
+The answer is: 10
+The answer is:  5
+!@#$%
+2
+The answer is: 10
+The answer is: 5
+!@#$%
+y
+3
+Input Set #1: YES
+Input Set #2: NO
+Input Set #3: NO
+!@#$%
+3
+Input Set #1: 	YES
+Input Set #2: 	NO
+Input Set #3: 	NO
+!@#$%
+Y
+1
+1 0 1  0 
+!@#$%
+1
+1010
+!@#$%
+y
+1
+The judges are mean!
+!@#$%
+1
+The judges are good!
+!@#$%
+Y
+1
+For example, there are 850 groups that have 80 to 99 clusters.
+!@#$%
+1
+For Instance, there was groups that has 80 to clustering.
+!@#$%
+Y
+1
+For example, there are 850 groups that have 80 to 99 clusters.
+!@#$%
+1
+For example, there are 850 groups that have 80 to99clusters.
+!@#$%
+y
+1
+For example, there are 850 groups that have 80 to 99 clusters.
+!@#$%
+2
+For example, there are 8
+50 groups that have 80 to 99 clusters.
+!@#$%
+n
+*/

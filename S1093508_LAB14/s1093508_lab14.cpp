@@ -166,8 +166,6 @@ int main(int argc, char**argv)
             {
                 if(firstName[i]==mergedfN[j]&&lastName[i]==mergedlN[j]&&accountType[i]==mergedaT[j]&&validity[i]=="true"&&mergedval[j]=="true")
                 {
-                    //TODO: THIS IS BUGGED
-                    //mergedaB[i]+=accountBalance[j];
                     sum = accountBalance[i]+mergedaB[j];
                     mergedaB[j]=sum;
                     if(date[i]>=mergeddt[j])
@@ -190,7 +188,14 @@ int main(int argc, char**argv)
         }
         if(duplicate)
         {
-            continue;
+            kept.push_back(false);
+            //use continue if storing duplicate is not desired. And remove the above line
+            //continue;
+        }
+        else
+        {
+            //put this outside if the else {...}, if using continue;
+            kept.push_back(true);
         }
         mergedacN.push_back(accountNumbers[i]);
         mergedfN.push_back(firstName[i]);
@@ -200,7 +205,7 @@ int main(int argc, char**argv)
         mergeddt.push_back(date[i]);
         mergedtm.push_back(time[i]);
         mergedval.push_back(validity[i]);
-        kept.push_back(true);
+
 
     }
     /*
