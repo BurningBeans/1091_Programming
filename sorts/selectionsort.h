@@ -6,7 +6,7 @@ void selection_sort(std::vector <T> &nums)
         int min = i;
         for(int j = i+1; j < nums.size(); j++)
         {
-            if(nums[min] < nums[j])
+            if(nums[min] > nums[j])
                 min = j;
         }
         std::swap(nums[i],nums[min]);
