@@ -56,7 +56,10 @@ void game(vector<vector<char>> &board)
     }
     board[x][y]='O';
     printboard(board);
-    //statuscheck(board);
+    if(statuscheck(board))
+    {
+        exit(0);
+    }
 
     cout << "Please enter the coordinates you want to places (X) on the board.\n";
     cout << "Your coordinates : ";
@@ -70,7 +73,39 @@ void game(vector<vector<char>> &board)
     }
     board[x][y]='X';
     printboard(board);
-    //statuscheck(board);
+    if(statuscheck(board))
+    {
+        exit(0);
+    }
     return game(board);
-}
+}  
 //----------------------------------------------------------------
+bool statuscheck(vector<vector<char>> board)
+{
+    if ((board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X') ||
+        (board[1][0] == 'X' && board[1][1] == 'X' && board[1][2] == 'X') ||
+        (board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X') ||
+        (board[0][0] == 'X' && board[1][0] == 'X' && board[2][0] == 'X') ||
+        (board[0][1] == 'X' && board[1][1] == 'X' && board[2][1] == 'X') ||
+        (board[0][2] == 'X' && board[1][2] == 'X' && board[2][2] == 'X') ||
+        (board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X') ||
+        (board[2][0] == 'X' && board[1][1] == 'X' && board[0][2] == 'X'))
+        {
+            cout << "Player (X) has won!\n";
+            return true;
+        }
+
+    if ((board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O') ||
+        (board[1][0] == 'O' && board[1][1] == 'O' && board[1][2] == 'O') ||
+        (board[2][0] == 'O' && board[2][1] == 'O' && board[2][2] == 'O') ||
+        (board[0][0] == 'O' && board[1][0] == 'O' && board[2][0] == 'O') ||
+        (board[0][1] == 'O' && board[1][1] == 'O' && board[2][1] == 'O') ||
+        (board[0][2] == 'O' && board[1][2] == 'O' && board[2][2] == 'O') ||
+        (board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O') ||
+        (board[2][0] == 'O' && board[1][1] == 'O' && board[0][2] == 'O'))
+        {
+            cout << "Player (O) has won!\n";
+            return true;
+        }
+    return false;
+}
