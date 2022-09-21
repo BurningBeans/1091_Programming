@@ -28,3 +28,4 @@ double foo(int num)
     }
     return a/(b*b);
 }
+//https://cdn.discordapp.com/attachments/775313732641357841/780271149199130674/unknown.png

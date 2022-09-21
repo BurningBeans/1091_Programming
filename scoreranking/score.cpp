@@ -4,27 +4,21 @@
 #include "string"
 #include "vector"
 #include "algorithm"
-void ssort(std::vector<int> &v, std::vector<std::string> &s, std::vector<std::string> &n)
+struct items{
+    std::string id;
+    std::string name;
+    double score;
+};
+void ssort(std::vector<items> &rank)
 {
-    if (v.size()<1)
-    {
-        //pass
+    if (rank.size()<1)
+    {//pass
     }
     else
-    {
-        for(int i = 0; i < v.size(); i++)
-        {
-            for(int j = i+1; j < v.size(); j++)
-            {
-                if(v[i] < v[j])
-                {
-                    std::swap(v[i], v[j]);
-                    std::swap(s[i], s[j]);
-                    std::swap(n[i], n[j]);
-                }
-            }
-        }
-    }
+        for(int i = 0; i < rank.size(); i++)
+            for(int j = i+1; j < rank.size(); j++)
+                if(rank[i].score < rank[j].score)
+                    std::swap(rank[i],rank[j]);
 }
 int main(int argc, char **)
 {
@@ -37,38 +31,36 @@ int main(int argc, char **)
         std::cerr << "File could not be opened!";
         exit(1);
     }
-    std::string id;
-    std::vector<std::string> idV;
-    std::string name;
-    std::vector<std::string> nameV;
-    int score;
-    std::vector<int> scoreV;
-    while(fptr >> id >> name >> score)
+    std::string inid;
+    std::string inname;
+    double inscore;
+    std::vector<items> rank;//storing scores
+    int counter = 0;
+    while(fptr >> inid >> inname >> inscore)
     {
-        idV.push_back(id);
-        nameV.push_back(name);
-        scoreV.push_back(score);
+        rank.push_back(items());
+        rank[counter].id = inid;
+        rank[counter].name = inname;
+        rank[counter].score = inscore;
+        counter++;
     }
     fptr.close();
-    ssort(scoreV, idV, nameV);
-    for(int i=0; i < scoreV.size(); i++)
+    ssort(rank);
+    std::cout << "Rank  " << std::setw(7) << "ID" << ' ' << std::setw(10) << "Name" << ' ' << std::setw(5) << "Score" << std::endl;
+    std::cout << "----  ------- ---------- -----"<< std::endl;
+    for(int i=0; i < rank.size(); i++)
     {
-        if(scoreV[i] == scoreV[i-1])
+        if(rank[i].score == rank[i-1].score)
             //std::cout << "Rank " << std::setw(2) << i << " :";
-            std::cout << "Rank    :";
+            std::cout << "     :";
         else
-            std::cout << "Rank " << std::setw(2) << i+1 << " :";
-        std::cout << std::setw(7) << idV[i] << ' ' << std::setw(10) << nameV[i] << ' ' << std::setw(3) << scoreV[i] << std::endl;
+            std::cout << std::setw(4) << i+1 << " :";
+        std::cout << std::setw(7) << rank[i].id << ' ' << std::setw(10) << rank[i].name << ' ' << std::setw(5) << rank[i].score << std::endl;
     }
     std::ofstream ofptr("ranked_score.txt");
-    for(int i = 0; i < scoreV.size(); i ++)
+    for(int i = 0; i < rank.size(); i++)
     {
-                if(scoreV[i] == scoreV[i-1])
-            //std::cout << "Rank " << std::setw(2) << i << " :";
-            ofptr << "Rank    :";
-        else
-            ofptr << "Rank " << std::setw(2) << i+1 << " :";
-        ofptr << std::setw(7) << idV[i] << ' ' << std::setw(10) << nameV[i] << ' ' << std::setw(3) << scoreV[i] << std::endl;
+        ofptr << rank[i].id << ' ' << rank[i].name << ' ' << rank[i].score << std::endl;
     }
     system("pause");
 }
